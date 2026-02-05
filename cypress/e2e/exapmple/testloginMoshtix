@@ -19,6 +19,7 @@ describe("Open Moshtix and log into moshtix", () => {
       const blank = win.document.querySelectorAll('[target="_blank"]');
       for (let i = 0; i < blank.length; i += 1) {
         blank[i].removeAttribute("target");
+        cy.wait(2000);
       }
     });
   });
