@@ -1,0 +1,25 @@
+describe("Open Moshtix and log into moshtix", () => {
+  it("should open moshtix.com", () => {
+    cy.visit("https://www.moshtix.com");
+    cy.get("#nav_login").click();
+    //cy.get('[name="password"]')cy.get('[name="username"]')
+    cy.get('[name="username"]').type("masood.ahmad@moshtix.com");
+    cy.get('[name="password"]').type("Moshtix123");
+
+    cy.get("#user-login-button").click();
+    cy.window().then((win) => {
+      const parentTargets = win.document.querySelectorAll('[target="_parent"]');
+      for (let i = 0; i < parentTargets.length; i += 1) {
+        parentTargets[i].removeAttribute("target");
+      }
+      const topTargets = win.document.querySelectorAll('[target="_top"]');
+      for (let i = 0; i < topTargets.length; i += 1) {
+        topTargets[i].removeAttribute("target");
+      }
+      const blank = win.document.querySelectorAll('[target="_blank"]');
+      for (let i = 0; i < blank.length; i += 1) {
+        blank[i].removeAttribute("target");
+      }
+    });
+  });
+});
